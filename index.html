@@ -66,4 +66,12 @@ function restore(e){const f=e.target.files[0];if(!f)return;const r=new FileReade
 function clearData(){if(confirm('Clear all JEE Bloom data?')){localStorage.removeItem(KEY);location.reload()}}
 function go(id,arg){const a=document.getElementById('app');let html='';if(id==='welcome')html=welcome();else if(id==='home')html=home();else if(id==='revision')html=revision();else if(id==='revdetail')html=revdetail(arg||2);else if(id==='tests')html=tests();else if(id==='library')html=library();else if(id==='planner')html=planner();else if(id==='weekly')html=weekly();else if(id==='monthly')html=monthly();else if(id==='mistakes')html=mistakes();else if(id==='flashcards')html=flashcards();else if(id==='mindmaps')html=mindmaps();else if(id==='master')html=master();else if(id==='settings')html=settings();a.innerHTML=html;window.scrollTo(0,0)}
 if(!db.onboard)go('welcome');else go('home');
-</script></body></html>
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('./sw.js', {scope: './'}).catch(function(err){ console.warn('JEE Bloom offline setup failed', err); });
+  });
+}
+</script>
+</body></html>
